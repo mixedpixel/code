@@ -1,0 +1,52 @@
+ <!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>mp4 looper</title>
+</head>
+
+<body>
+
+<video width=640 id="video" src="" autoplay controls></video>
+
+<script>
+  let index = 0
+  let videoContainer = document.getElementsByTagName('video')[0]
+
+  var videoArr = [{
+      url: "https://www.w3schools.com/html/mov_bbb.mp4",
+      created: 20190708185030
+    },
+    {
+      url: "http://techslides.com/demos/sample-videos/small.mp4",
+      created: 20190708185040
+    },
+    {
+      url: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
+      created: 20190708185060
+    }
+  ];
+
+  /* funkcja komparatora sortująca malejąco, po dacie filmu */
+  videoArr.sort(function(a, b) {
+    return b.created - a.created
+  });
+
+  function playMovie() {
+    const videoObject = videoArr[index++ % videoArr.length]
+    const videoURL = videoObject.url
+    videoContainer.src = videoURL
+    videoContainer.load()
+  }
+
+  video.addEventListener('ended', playMovie, false)
+  playMovie();
+
+</script>
+
+<br><br>
+
+<button onclick="playMovie()">włącz następny film</button>
+
+</body>
+</html>
